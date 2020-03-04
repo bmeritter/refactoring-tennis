@@ -42,7 +42,7 @@ public class TennisGame1 implements TennisGame {
         int minusResult = mScore1 - mScore2;
 
         String playerName = minusResult > 0 ? "player1" : "player2";
-        String score = Math.abs(minusResult) == 1 ? "Advantage" : "Win for";
+        String score = Math.abs(minusResult) == 1 ? Constant.ADVANTAGE : Constant.WIN_FOR;
 
         return score + Constant.SPACE + playerName;
     }

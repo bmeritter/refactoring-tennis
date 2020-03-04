@@ -9,4 +9,6 @@ public class Constant {
     public static final String DEUCE = "Deuce";
     public static final String HYPHEN = "-";
     public static final String SPACE = " ";
+    public static final String ADVANTAGE = "Advantage";
+    public static final String WIN_FOR = "Win for";
 }
