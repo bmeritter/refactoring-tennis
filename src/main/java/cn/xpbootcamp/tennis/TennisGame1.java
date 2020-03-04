@@ -15,32 +15,19 @@ public class TennisGame1 implements TennisGame {
     }
 
     public void wonPoint(String playerName) {
-        if (playerName == "player1")
+        if ("player1".equals(playerName)) {
             mScore1 += 1;
-        else
+        } else {
             mScore2 += 1;
+        }
     }
 
     public String getScore() {
         String score = "";
-        int tempScore = 0;
-        if (mScore1 == mScore2) {
-            switch (mScore1) {
-                case 0:
-                    score = Constant.LOVE + Constant.HYPHEN + Constant.ALL;
-                    break;
-                case 1:
-                    score = Constant.FIFTEEN + Constant.HYPHEN + Constant.ALL;
-                    break;
-                case 2:
-                    score = Constant.THIRTY + Constant.HYPHEN + Constant.ALL;
-                    break;
-                default:
-                    score = Constant.DEUCE;
-                    break;
-
-            }
-        } else if (mScore1 >= 4 || mScore2 >= 4) {
+        int tempScore;
+        if (isEqualScore(mScore1, mScore2)) {
+            score += mScore1 < 3 ? scores[mScore1] + Constant.HYPHEN + Constant.ALL : Constant.DEUCE;
+        } else if (isOneScoreMoreThanFour()) {
             int minusResult = mScore1 - mScore2;
             if (minusResult == 1) {
                 score = "Advantage player1";
@@ -63,5 +50,13 @@ public class TennisGame1 implements TennisGame {
             }
         }
         return score;
+    }
+
+    private boolean isOneScoreMoreThanFour() {
+        return mScore1 >= 4 || mScore2 >= 4;
+    }
+
+    private boolean isEqualScore(int mScore1, int mScore2) {
+        return mScore1 == mScore2;
     }
 }
