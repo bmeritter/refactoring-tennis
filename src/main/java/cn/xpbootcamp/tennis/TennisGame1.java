@@ -23,33 +23,35 @@ public class TennisGame1 implements TennisGame {
     }
 
     public String getScore() {
+        if (isEqualScore(mScore1, mScore2)) {
+            return mScore1 < 3 ? scores[mScore1] + Constant.HYPHEN + Constant.ALL : Constant.DEUCE;
+        }
+
+        if (isOneScoreMoreThanFour()) {
+            return getOneScoreMoreThanFourScore();
+        }
+
         String score = "";
         int tempScore;
-        if (isEqualScore(mScore1, mScore2)) {
-            score += mScore1 < 3 ? scores[mScore1] + Constant.HYPHEN + Constant.ALL : Constant.DEUCE;
-        } else if (isOneScoreMoreThanFour()) {
-            int minusResult = mScore1 - mScore2;
-            if (minusResult == 1) {
-                score = "Advantage player1";
-            } else if (minusResult == -1) {
-                score = "Advantage player2";
-            } else if (minusResult >= 2) {
-                score = "Win for player1";
+        for (int i = 1; i < 3; i++) {
+            if (i == 1) {
+                tempScore = mScore1;
             } else {
-                score = "Win for player2";
+                score += Constant.HYPHEN;
+                tempScore = mScore2;
             }
-        } else {
-            for (int i = 1; i < 3; i++) {
-                if (i == 1) {
-                    tempScore = mScore1;
-                } else {
-                    score += Constant.HYPHEN;
-                    tempScore = mScore2;
-                }
-                score += scores[tempScore];
-            }
+            score += scores[tempScore];
         }
         return score;
+    }
+
+    private String getOneScoreMoreThanFourScore() {
+        int minusResult = mScore1 - mScore2;
+
+        String playerName = minusResult > 0 ? "player1" : "player2";
+        String score = Math.abs(minusResult) == 1 ? "Advantage" : "Win for";
+
+        return score + " " + playerName;
     }
 
     private boolean isOneScoreMoreThanFour() {
