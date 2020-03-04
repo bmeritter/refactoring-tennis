@@ -2,8 +2,10 @@ package cn.xpbootcamp.tennis;
 
 public class TennisGame1 implements TennisGame {
 
-    private int m_score1 = 0;
-    private int m_score2 = 0;
+    private String[] scores = {Constant.LOVE, Constant.FIFTEEN, Constant.THIRTY, Constant.FORTY};
+
+    private int mScore1 = 0;
+    private int mScore2 = 0;
     private String player1Name;
     private String player2Name;
 
@@ -14,62 +16,50 @@ public class TennisGame1 implements TennisGame {
 
     public void wonPoint(String playerName) {
         if (playerName == "player1")
-            m_score1 += 1;
+            mScore1 += 1;
         else
-            m_score2 += 1;
+            mScore2 += 1;
     }
 
     public String getScore() {
         String score = "";
-        int tempScore=0;
-        if (m_score1==m_score2)
-        {
-            switch (m_score1)
-            {
+        int tempScore = 0;
+        if (mScore1 == mScore2) {
+            switch (mScore1) {
                 case 0:
-                        score = "Love-All";
+                    score = Constant.LOVE + Constant.HYPHEN + Constant.ALL;
                     break;
                 case 1:
-                        score = "Fifteen-All";
+                    score = Constant.FIFTEEN + Constant.HYPHEN + Constant.ALL;
                     break;
                 case 2:
-                        score = "Thirty-All";
+                    score = Constant.THIRTY + Constant.HYPHEN + Constant.ALL;
                     break;
                 default:
-                        score = "Deuce";
+                    score = Constant.DEUCE;
                     break;
 
             }
-        }
-        else if (m_score1>=4 || m_score2>=4)
-        {
-            int minusResult = m_score1-m_score2;
-            if (minusResult==1) score ="Advantage player1";
-            else if (minusResult ==-1) score ="Advantage player2";
-            else if (minusResult>=2) score = "Win for player1";
-            else score ="Win for player2";
-        }
-        else
-        {
-            for (int i=1; i<3; i++)
-            {
-                if (i==1) tempScore = m_score1;
-                else { score+="-"; tempScore = m_score2;}
-                switch(tempScore)
-                {
-                    case 0:
-                        score+="Love";
-                        break;
-                    case 1:
-                        score+="Fifteen";
-                        break;
-                    case 2:
-                        score+="Thirty";
-                        break;
-                    case 3:
-                        score+="Forty";
-                        break;
+        } else if (mScore1 >= 4 || mScore2 >= 4) {
+            int minusResult = mScore1 - mScore2;
+            if (minusResult == 1) {
+                score = "Advantage player1";
+            } else if (minusResult == -1) {
+                score = "Advantage player2";
+            } else if (minusResult >= 2) {
+                score = "Win for player1";
+            } else {
+                score = "Win for player2";
+            }
+        } else {
+            for (int i = 1; i < 3; i++) {
+                if (i == 1) {
+                    tempScore = mScore1;
+                } else {
+                    score += Constant.HYPHEN;
+                    tempScore = mScore2;
                 }
+                score += scores[tempScore];
             }
         }
         return score;
