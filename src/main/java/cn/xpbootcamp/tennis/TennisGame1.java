@@ -31,18 +31,11 @@ public class TennisGame1 implements TennisGame {
             return getOneScoreMoreThanFourScore();
         }
 
-        String score = "";
-        int tempScore;
-        for (int i = 1; i < 3; i++) {
-            if (i == 1) {
-                tempScore = mScore1;
-            } else {
-                score += Constant.HYPHEN;
-                tempScore = mScore2;
-            }
-            score += scores[tempScore];
-        }
-        return score;
+        return getLessThreeScore();
+    }
+
+    private String getLessThreeScore() {
+        return scores[mScore1] + Constant.HYPHEN + scores[mScore2];
     }
 
     private String getOneScoreMoreThanFourScore() {
@@ -51,7 +44,7 @@ public class TennisGame1 implements TennisGame {
         String playerName = minusResult > 0 ? "player1" : "player2";
         String score = Math.abs(minusResult) == 1 ? "Advantage" : "Win for";
 
-        return score + " " + playerName;
+        return score + Constant.SPACE + playerName;
     }
 
     private boolean isOneScoreMoreThanFour() {

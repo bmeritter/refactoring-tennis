@@ -8,4 +8,5 @@ public class Constant {
     public static final String ALL = "All";
     public static final String DEUCE = "Deuce";
     public static final String HYPHEN = "-";
+    public static final String SPACE = " ";
 }
