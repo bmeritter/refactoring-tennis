@@ -26,14 +26,10 @@ public class TennisGame2 implements TennisGame {
         }
 
         if (p1Point > 0 && p2Point == 0) {
-            p1Res = p1Point < 4 ? scores[p1Point] : "";
-            p2Res = Constant.LOVE;
-            score = p1Res + Constant.HYPHEN + p2Res;
+            score = getOneScoreZeroOtherMoreThanZero(p1Point);
         }
         if (p2Point > 0 && p1Point == 0) {
-            p2Res = p2Point < 4 ? scores[p2Point] : "";
-            p1Res = Constant.LOVE;
-            score = p1Res + Constant.HYPHEN + p2Res;
+            score = getOneScoreZeroOtherMoreThanZero(p2Point);
         }
 
         if (p1Point > p2Point && p1Point < 4) {
@@ -58,6 +54,12 @@ public class TennisGame2 implements TennisGame {
             score = Constant.WIN_FOR + Constant.SPACE + player2Name;
         }
         return score;
+    }
+
+    private String getOneScoreZeroOtherMoreThanZero(int point) {
+        p1Res = point < 4 ? scores[point] : "";
+        p2Res = Constant.LOVE;
+        return p1Res + Constant.HYPHEN + p2Res;
     }
 
     private String getOneScoreLessFourAndMoreThanOther() {
