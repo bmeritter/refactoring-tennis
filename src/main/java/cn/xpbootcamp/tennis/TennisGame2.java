@@ -37,14 +37,10 @@ public class TennisGame2 implements TennisGame {
         }
 
         if (p1Point > p2Point && p1Point < 4) {
-            p1Res = scores[p1Point];
-            p2Res = scores[p2Point];
-            score = p1Res + Constant.HYPHEN + p2Res;
+            score = getOneScoreLessFourAndMoreThanOther();
         }
         if (p2Point > p1Point && p2Point < 4) {
-            p1Res = scores[p1Point];
-            p2Res = scores[p2Point];
-            score = p1Res + Constant.HYPHEN + p2Res;
+            score = getOneScoreLessFourAndMoreThanOther();
         }
 
         if (p1Point > p2Point && p2Point >= 3) {
@@ -62,6 +58,12 @@ public class TennisGame2 implements TennisGame {
             score = Constant.WIN_FOR + Constant.SPACE + player2Name;
         }
         return score;
+    }
+
+    private String getOneScoreLessFourAndMoreThanOther() {
+        p1Res = scores[p1Point];
+        p2Res = scores[p2Point];
+        return p1Res + Constant.HYPHEN + p2Res;
     }
 
     public void setp1Score(int number) {
