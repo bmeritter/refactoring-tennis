@@ -6,8 +6,10 @@ public class TennisGame2 implements TennisGame {
 
     public String p1Res = "";
     public String p2Res = "";
-    private String player1Name;
-    private String player2Name;
+    private String player1Name = "player1";
+    private String player2Name = "player2";
+
+    private String[] scores = {Constant.LOVE, Constant.FIFTEEN, Constant.THIRTY, Constant.FORTY};
 
     public TennisGame2(String player1Name, String player2Name) {
         this.player1Name = player1Name;
@@ -17,76 +19,47 @@ public class TennisGame2 implements TennisGame {
     public String getScore() {
         String score = "";
         if (p1Point == p2Point && p1Point < 4) {
-            if (p1Point == 0)
-                score = Constant.LOVE;
-            if (p1Point == 1)
-                score = Constant.FIFTEEN;
-            if (p1Point == 2)
-                score = Constant.THIRTY;
-            score += Constant.HYPHEN + Constant.ALL;
+            score += scores[p1Point] + Constant.HYPHEN + Constant.ALL;
         }
-        if (p1Point == p2Point && p1Point >= 3)
+        if (p1Point == p2Point && p1Point >= 3) {
             score = Constant.DEUCE;
+        }
 
         if (p1Point > 0 && p2Point == 0) {
-            if (p1Point == 1)
-                p1Res = Constant.FIFTEEN;
-            if (p1Point == 2)
-                p1Res = Constant.THIRTY;
-            if (p1Point == 3)
-                p1Res = Constant.FORTY;
-
+            p1Res = p1Point < 4 ? scores[p1Point] : "";
             p2Res = Constant.LOVE;
             score = p1Res + Constant.HYPHEN + p2Res;
         }
         if (p2Point > 0 && p1Point == 0) {
-            if (p2Point == 1)
-                p2Res = Constant.FIFTEEN;
-            if (p2Point == 2)
-                p2Res = Constant.FORTY;
-            if (p2Point == 3)
-                p2Res = Constant.LOVE;
-
+            p2Res = p2Point < 4 ? scores[p2Point] : "";
             p1Res = Constant.LOVE;
             score = p1Res + Constant.HYPHEN + p2Res;
         }
 
         if (p1Point > p2Point && p1Point < 4) {
-            if (p1Point == 2)
-                p1Res = Constant.THIRTY;
-            if (p1Point == 3)
-                p1Res = Constant.FORTY;
-            if (p2Point == 1)
-                p2Res = Constant.FIFTEEN;
-            if (p2Point == 2)
-                p2Res = Constant.THIRTY;
+            p1Res = scores[p1Point];
+            p2Res = scores[p2Point];
             score = p1Res + Constant.HYPHEN + p2Res;
         }
         if (p2Point > p1Point && p2Point < 4) {
-            if (p2Point == 2)
-                p2Res = Constant.THIRTY;
-            if (p2Point == 3)
-                p2Res = Constant.FORTY;
-            if (p1Point == 1)
-                p1Res = Constant.FIFTEEN;
-            if (p1Point == 2)
-                p1Res = Constant.THIRTY;
+            p1Res = scores[p1Point];
+            p2Res = scores[p2Point];
             score = p1Res + Constant.HYPHEN + p2Res;
         }
 
         if (p1Point > p2Point && p2Point >= 3) {
-            score = Constant.ADVANTAGE + Constant.SPACE + "player1";
+            score = Constant.ADVANTAGE + Constant.SPACE + player1Name;
         }
 
         if (p2Point > p1Point && p1Point >= 3) {
-            score = Constant.ADVANTAGE + Constant.SPACE + "player2";
+            score = Constant.ADVANTAGE + Constant.SPACE + player2Name;
         }
 
         if (p1Point >= 4 && p2Point >= 0 && (p1Point - p2Point) >= 2) {
-            score = Constant.WIN_FOR + Constant.SPACE + "player1";
+            score = Constant.WIN_FOR + Constant.SPACE + player1Name;
         }
         if (p2Point >= 4 && p1Point >= 0 && (p2Point - p1Point) >= 2) {
-            score = Constant.WIN_FOR + Constant.SPACE + "player2";
+            score = Constant.WIN_FOR + Constant.SPACE + player2Name;
         }
         return score;
     }
